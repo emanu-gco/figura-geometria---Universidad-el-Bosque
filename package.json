@@ -1,0 +1,13 @@
+{
+  "name": "poligonos-app",
+  "version": "1.0.0",
+  "description": "Visualizador de polígonos y sus propiedades geométricas",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "parcel": "*"
+  }
+}
