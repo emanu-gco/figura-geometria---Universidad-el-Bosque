@@ -1,10 +1,10 @@
 /**
  * Análisis Geométrico de Polígonos
  * 
- * Hola, soy el estudiante desarrollador de este código. En este archivo me encargaré
+ * Hola, somos estudiantes desarrolladores de este código. En este archivo nos encargamos
  * de dibujar el polígono y calcular sus propiedades matemáticas de forma dinámica.
  * Usaremos Vanilla JS y un poco de trigonometría básica. La idea es que todo
- * funcione de manera clara para poder explicárselo al profesor de Geometría.
+ * funcione de manera clara para poder explicarlo.
  */
 
 // Nombres comunes para los polígonos, desde el triángulo (n=3) hasta el icoságono (n=20).
@@ -15,7 +15,7 @@ const nombresPoligonos = {
 };
 
 // --- REFERENCIAS AL DOM ---
-// Aquí obtengo todos los elementos HTML con los que voy a interactuar en la UI.
+// Aquí obtenemos todos los elementos HTML con los que vamos a interactuar en la UI.
 const inputRangeN = document.getElementById("n-sides");
 const inputNumberN = document.getElementById("n-number");
 const spanNVal = document.getElementById("n-val-display");
@@ -34,8 +34,8 @@ const resDiagTotal = document.getElementById("diag-total");
 // --- FUNCIONES MATEMÁTICAS / GEOMÉTRICAS ---
 
 /**
- * Calculo las coordenadas (x, y) de los vértices de un polígono regular.
- * Utilizo las funciones trigonométricas seno y coseno para distribuir los puntos
+ * Calculamos las coordenadas (x, y) de los vértices de un polígono regular.
+ * Utilizamos las funciones trigonométricas seno y coseno para distribuir los puntos
  * uniformemente a lo largo de una circunferencia imaginaria (circunscrita).
  */
 function calcularVertices(n, radio, centroX, centroY) {
@@ -55,7 +55,7 @@ function calcularVertices(n, radio, centroX, centroY) {
 }
 
 /**
- * Calculo el punto medio exacto entre dos coordenadas cartesianas dadas.
+ * Calculamos el punto medio exacto entre dos coordenadas cartesianas dadas.
  */
 function obtenerPuntoMedio(v1, v2) {
   return {
@@ -131,7 +131,7 @@ function actualizarVista() {
   // 3. DIBUJAR PUNTOS MEDIOS (si la casilla está marcada)
   const puntosMedios = [];
   if (mostrarPuntosMedios) {
-    // Calculo primero todos los puntos medios de los lados
+    // Calculamos primero todos los puntos medios de los lados
     for (let i = 0; i < n; i++) {
       const pActual = vertices[i];
       const pSiguiente = vertices[(i + 1) % n]; // El módulo % n asegura que el último conecte con el primero formando un ciclo
@@ -149,7 +149,7 @@ function actualizarVista() {
   }
 
   // 4. DIBUJAR EL CONTORNO (LOS LADOS) DEL POLÍGONO
-  // Construyo el string con todos los puntos para la etiqueta <polygon> de SVG
+  // Construimos el string con todos los puntos para la etiqueta <polygon> de SVG
   const puntosStr = vertices.map(v => `${v.x},${v.y}`).join(" ");
   const poligono = crearElementoSVG("polygon", {
     points: puntosStr,
@@ -161,7 +161,7 @@ function actualizarVista() {
   svgCanvas.appendChild(poligono);
 
   // 5. DIBUJAR LOS VÉRTICES Y SUS NOMBRES
-  // Los dibujo al final para que queden sobre los lados y líneas y no se tapen.
+  // Los dibujamos al final para que queden sobre los lados y líneas y no se tapen.
   vertices.forEach((v, i) => {
     const circulo = crearElementoSVG("circle", {
       cx: v.x, cy: v.y, r: "6",
@@ -192,7 +192,7 @@ function actualizarVista() {
 }
 
 /**
- * Calculo y muestro todos los teoremas que aplicamos en el laboratorio.
+ * Calculamos y mostramos todos los teoremas que aplicamos.
  */
 function actualizarTablaMatematica(n) {
   // Asignar el nombre del polígono o colocar n-ágono si es mayor.
@@ -210,13 +210,13 @@ function actualizarTablaMatematica(n) {
 }
 
 // --- EVENT LISTENERS ---
-// Conecto las acciones del usuario con la función principal para que sea reactivo.
+// Conectamos las acciones del usuario con la función principal para que sea reactivo.
 inputRangeN.addEventListener("input", actualizarVista);
 
 // Permitir que si escriben un número manualmente, el slider también se actualice
 inputNumberN.addEventListener("input", (e) => {
   let val = parseInt(e.target.value);
-  // Limito a los valores lógicos, mínimo 3 lados (no existe polígono de 2 lados)
+  // Limitamos a los valores lógicos, mínimo 3 lados (no existe polígono de 2 lados)
   if (isNaN(val) || val < 3) val = 3;
   if (val > 50) val = 50; // Límite por sanidad para no colapsar el dibujado del navegador
   inputRangeN.value = val;
@@ -227,5 +227,5 @@ chkDiagonales.addEventListener("change", actualizarVista);
 chkPuntosMedios.addEventListener("change", actualizarVista);
 
 // --- INICIALIZACIÓN ---
-// Llamo a la función una vez al cargar la página para que se dibuje el estado inicial.
+// Llamamos a la función una vez al cargar la página para que se dibuje el estado inicial.
 actualizarVista();
